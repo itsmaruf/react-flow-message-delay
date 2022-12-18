@@ -72,9 +72,13 @@ const MessageNode = ({ data }) => {
         </div>
       )}
       <Handle
-        id="message-source-1"
         type="source"
         position={Position.Right}
+        style={{ top: 100 }}
+      ></Handle>
+      <Handle
+        type="target"
+        position={Position.Left}
         style={{ top: 100 }}
       ></Handle>
     </div>

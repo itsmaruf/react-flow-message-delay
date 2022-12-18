@@ -4,7 +4,6 @@ import { AiOutlineMore, AiOutlineClose } from "react-icons/ai";
 import { BsClock } from "react-icons/bs";
 
 import "../Nodes.css";
-import Textarea from "../../Components/Textarea/Textarea";
 const DelayNode = ({ data }) => {
   const [btnVisibility, setBtnVisibility] = useState(false);
 
@@ -31,6 +30,7 @@ const DelayNode = ({ data }) => {
     <div className="greeting-node relative shadow">
       <div>
         <Handle type="target" position={Position.Left} style={leftTop}></Handle>
+        <Handle type="source" position={Position.Right}></Handle>
 
         <div className="node-header flex justify-between items-center">
           <div className="flex justify-start items-center">
@@ -48,7 +48,15 @@ const DelayNode = ({ data }) => {
         </div>
         <div className="node-body">
           <div className="node-module">
-            <Textarea
+            <input
+              type="number"
+              onChange={onChange}
+              className="input input-bordered w-full"
+              placeholder="Enter delay time in Seconds"
+              name=""
+              id=""
+            />
+            {/* <Textarea
               onChange={onChange}
               rows={3}
               name="delay"
@@ -56,7 +64,7 @@ const DelayNode = ({ data }) => {
               value={
                 "Please enter the amount of the delay ( in seconds, please! )"
               }
-            ></Textarea>
+            ></Textarea> */}
           </div>
           <div className="text-right pb-5">
             <button className="btn btn-primary btn-sm">Save</button>
