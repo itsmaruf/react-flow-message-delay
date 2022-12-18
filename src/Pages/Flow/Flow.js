@@ -41,15 +41,15 @@ const Flow = () => {
     event.dataTransfer.dropEffect = "move";
   }, []);
 
-  const onConnectStart = (_, { nodeId, handleType }) => {
-    console.log("on connect start", { nodeId, handleType });
+  //   const onConnectStart = (_, { nodeId, handleType }) => {
+  //     console.log("on connect start", { nodeId, handleType });
 
-    if (nodeId === "start") {
-      localStorage.clear();
-    }
-  };
+  //     if (nodeId === "start") {
+  //       localStorage.clear();
+  //     }
+  //   };
 
-  const onConnectEnd = (event, nodeId) => console.log("connected with", nodeId);
+  //   const onConnectEnd = (event, nodeId) => console.log("connected with", nodeId);
 
   //   create a function to connect the nodes
   const onConnect = useCallback(
@@ -168,8 +168,6 @@ const Flow = () => {
               onEdgeUpdate={onEdgeUpdate}
               onEdgeUpdateStart={onEdgeUpdateStart}
               onEdgeUpdateEnd={onEdgeUpdateEnd}
-              onConnectStart={onConnectStart}
-              onConnectEnd={onConnectEnd}
               defaultEdgeOptions={edgeOptions}
               selectNodesOnDrag={false}
               // deleteNode

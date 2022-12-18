@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Handle, Position } from "reactflow";
 import { AiFillMessage, AiOutlineMore, AiOutlineClose } from "react-icons/ai";
-import { FaEnvelope } from "react-icons/fa";
 
 import "../Nodes.css";
+import TextArea from "../../Components/Textarea/Textarea";
+
 const MessageNode = ({ data }) => {
   const [btnVisibility, setBtnVisibility] = useState(false);
-
-  const leftTop = {
-    top: 40,
-  };
 
   const visibilityHandler = () => {
     setBtnVisibility(!btnVisibility);
@@ -20,17 +17,21 @@ const MessageNode = ({ data }) => {
     data.deleteNode(id);
   };
 
+  const onChange = useCallback((evt) => {
+    const value = evt.target.value;
+    localStorage.setItem(evt.target.name, JSON.stringify(value));
+    console.log(evt.target.value);
+  }, []);
+
   return (
     <div className="greeting-node relative shadow">
       <div>
-        <Handle type="target" position={Position.Left} style={leftTop}></Handle>
-
         <div className="node-header flex justify-between items-center">
           <div className="flex justify-start items-center">
             <div className="text-primary border rounded p-1 mr-4 h-auto">
               <AiFillMessage />
             </div>
-            <p className="text-lg font-bold">Contact</p>
+            <p className="text-lg font-bold">Send Message</p>
           </div>
           <button
             onClick={visibilityHandler}
@@ -41,15 +42,19 @@ const MessageNode = ({ data }) => {
         </div>
         <div className="node-body">
           <div className="node-module">
-            <div className="border border-gray p-3 rounded-md">
-              <a
-                href="/"
-                className="text-primary flex items-center justify-start"
-              >
-                <FaEnvelope className="mr-3" />
-                dev@dev.com
-              </a>
-            </div>
+            <TextArea
+              onChange={onChange}
+              rows={3}
+              name="message"
+              placeHolder={"write something"}
+              value={
+                "Hey there! You want to say something? feel free to write here..."
+              }
+            ></TextArea>
+          </div>
+
+          <div className="text-right pb-5">
+            <button className="btn btn-primary btn-sm">Send</button>
           </div>
         </div>
       </div>
@@ -66,6 +71,12 @@ const MessageNode = ({ data }) => {
           </button>
         </div>
       )}
+      <Handle
+        id="message-source-1"
+        type="source"
+        position={Position.Right}
+        style={{ top: 100 }}
+      ></Handle>
     </div>
   );
 };

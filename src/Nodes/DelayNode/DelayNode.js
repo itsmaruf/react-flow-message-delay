@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Handle, Position } from "reactflow";
-import { AiFillMessage, AiOutlineMore, AiOutlineClose } from "react-icons/ai";
-import { FaEnvelope } from "react-icons/fa";
+import { AiOutlineMore, AiOutlineClose } from "react-icons/ai";
+import { BsClock } from "react-icons/bs";
 
 import "../Nodes.css";
+import Textarea from "../../Components/Textarea/Textarea";
 const DelayNode = ({ data }) => {
   const [btnVisibility, setBtnVisibility] = useState(false);
 
@@ -20,6 +21,12 @@ const DelayNode = ({ data }) => {
     data.deleteNode(id);
   };
 
+  const onChange = useCallback((evt) => {
+    const value = evt.target.value;
+    localStorage.setItem(evt.target.name, JSON.stringify(value));
+    console.log(evt.target.value);
+  }, []);
+
   return (
     <div className="greeting-node relative shadow">
       <div>
@@ -28,9 +35,9 @@ const DelayNode = ({ data }) => {
         <div className="node-header flex justify-between items-center">
           <div className="flex justify-start items-center">
             <div className="text-primary border rounded p-1 mr-4 h-auto">
-              <AiFillMessage />
+              <BsClock />
             </div>
-            <p className="text-lg font-bold">Contact</p>
+            <p className="text-lg font-bold">Delay Amount</p>
           </div>
           <button
             onClick={visibilityHandler}
@@ -41,15 +48,18 @@ const DelayNode = ({ data }) => {
         </div>
         <div className="node-body">
           <div className="node-module">
-            <div className="border border-gray p-3 rounded-md">
-              <a
-                href="/"
-                className="text-primary flex items-center justify-start"
-              >
-                <FaEnvelope className="mr-3" />
-                dev@dev.com
-              </a>
-            </div>
+            <Textarea
+              onChange={onChange}
+              rows={3}
+              name="delay"
+              placeHolder={"write something"}
+              value={
+                "Please enter the amount of the delay ( in seconds, please! )"
+              }
+            ></Textarea>
+          </div>
+          <div className="text-right pb-5">
+            <button className="btn btn-primary btn-sm">Save</button>
           </div>
         </div>
       </div>
