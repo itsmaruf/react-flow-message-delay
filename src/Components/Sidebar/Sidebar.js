@@ -3,7 +3,7 @@ import "./Sidebar.css";
 
 import { BiMessageRoundedDots } from "react-icons/bi";
 import { BsClock } from "react-icons/bs";
-import { GrCatalog, GrDrag } from "react-icons/gr";
+import { GrDrag } from "react-icons/gr";
 
 const Sidebar = () => {
   const onDragStart = (event, nodeType) => {
