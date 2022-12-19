@@ -149,9 +149,43 @@ const Flow = () => {
     },
   };
 
+  // function allStorage() {
+  //   var archive = {}, // Notice change here
+  //     keys = Object.keys(localStorage),
+  //     i = keys.length;
+
+  //   while (i--) {
+  //     archive[keys[i]] = localStorage.getItem(keys[i]);
+  //   }
+
+  //   return archive;
+  // }
+
+  // database push handler
+  const handlePush = () => {
+    const newData = { localStorage };
+    console.log(newData.localStorage);
+
+    fetch("http://localhost:8000/api/v1/flow", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ newData }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+
+    // // localStorage.clear();
+  };
   return (
     <div>
       <div className="dndflow">
+        <div className="lg:w-5/6 w-full mx-auto py-3 text-right">
+          <button className="btn btn-primary px-8" onClick={handlePush}>
+            Publish Flow
+          </button>
+        </div>
         <ReactFlowProvider>
           <div className="reactflow-wrapper" ref={reactFlowWrapper}>
             <ReactFlow

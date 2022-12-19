@@ -7,6 +7,7 @@ import TextArea from "../../Components/Textarea/Textarea";
 
 const MessageNode = ({ data }) => {
   const [btnVisibility, setBtnVisibility] = useState(false);
+  const id = data.id;
 
   const visibilityHandler = () => {
     setBtnVisibility(!btnVisibility);
@@ -19,8 +20,9 @@ const MessageNode = ({ data }) => {
 
   const onChange = useCallback((evt) => {
     const value = evt.target.value;
-    localStorage.setItem(evt.target.name, JSON.stringify(value));
+    localStorage.setItem(evt.target.name + id, JSON.stringify(value));
     console.log(evt.target.value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -51,10 +53,6 @@ const MessageNode = ({ data }) => {
                 "Hey there! You want to say something? feel free to write here..."
               }
             ></TextArea>
-          </div>
-
-          <div className="text-right pb-5">
-            <button className="btn btn-primary btn-sm">Send</button>
           </div>
         </div>
       </div>

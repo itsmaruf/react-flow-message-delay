@@ -22,8 +22,9 @@ const DelayNode = ({ data }) => {
 
   const onChange = useCallback((evt) => {
     const value = evt.target.value;
-    localStorage.setItem(evt.target.name, JSON.stringify(value));
+    localStorage.setItem(evt.target.name + data.id, JSON.stringify(value));
     console.log(evt.target.value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -53,21 +54,9 @@ const DelayNode = ({ data }) => {
               onChange={onChange}
               className="input input-bordered w-full"
               placeholder="Enter delay time in Seconds"
-              name=""
+              name="delay"
               id=""
             />
-            {/* <Textarea
-              onChange={onChange}
-              rows={3}
-              name="delay"
-              placeHolder={"write something"}
-              value={
-                "Please enter the amount of the delay ( in seconds, please! )"
-              }
-            ></Textarea> */}
-          </div>
-          <div className="text-right pb-5">
-            <button className="btn btn-primary btn-sm">Save</button>
           </div>
         </div>
       </div>
