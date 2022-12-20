@@ -176,7 +176,7 @@ const Flow = () => {
       .then((response) => response.json())
       .then((data) => console.log(data));
 
-    // // localStorage.clear();
+    localStorage.clear();
   };
   return (
     <div>
